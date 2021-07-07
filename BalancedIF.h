@@ -22,7 +22,7 @@ public:
 
 	//CONSTRUCTORS
 	//use to recons A but with efficient storage of A mtx vec based
-	BalancedIF(double t_0, double v_0, int n1, int n2, short holder, double r);
+	BalancedIF(double t_0, double v_0, int n1, int n2);
 
 	void UpdateConst4();   //event driven updating
 	void newforcing2();

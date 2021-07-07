@@ -45,42 +45,21 @@ void recSetBalancedRecurrentIFmean()
 	int n2 = 5000;          
 
 					// Create the output files
-	ofstream times("Times.txt");  //stores each time stats are computed
-	ofstream volt("Voltage.txt"); //stores mean voltage across network (LFP)
-
-	ofstream fr("firingRates.txt");
-
 	double vTot = 0;  //used to store total voltage across network
-
 	ofstream A("A.txt");
-
-	//ofstream B("B.txt");
-	//ofstream C("C.txt");
-	//ofstream eT("eT.txt");
-	//ofstream eN("eN.txt");
-
 	ofstream conNumA("conNumA.txt");  //number of connections in A
-
 	ofstream numIt("numIt.txt");  
 
 							
-	double fval = 1.5; //value of constant stimulus  //often 1.5 in 1000 neuron net, but 1.1 seems to work well for smaller 100 neuron net
-	double finc = 0; //amount to increment forcing after each iteration
-
 	int iterations = 1000;  //number of iterations (how many different stimuli use to measure system)
 	numIt << iterations << endl;
-
-
 	vector<double> avvolt;
 
 
 	time_t start = time(NULL);
 
 
-	//place holder variable, to distinguish between multiple constructors used in other code
-	short holder2 = 2;
-
-	BalancedIF nodes(0, 0, n1, n2, holder2, fval);
+	BalancedIF nodes(0, 0, n1, n2);
 
 	srand((unsigned)time(NULL));
 
@@ -103,9 +82,6 @@ void recSetBalancedRecurrentIFmean()
 
 	for (int k = 1; k <= iterations; k++)
 	{
-
-		
-
 		string fname = "firingRates";
 
 		string Result;          // string which will contain the result
@@ -165,10 +141,10 @@ void recSetBalancedRecurrentIFmean()
 
 		int tcount = 0;
 
-		cout << "here" << endl;
+		
 		// RUN THE NEURONS
 		time_t start = time(NULL);
-		cout << "Running the Network." << endl;
+		
 		while (nodes.t_<run_time)
 		{
 
@@ -209,14 +185,13 @@ void recSetBalancedRecurrentIFmean()
 			forc << nodes.neurons.at(i).I_ << endl;
 		}
 
-		fval = fval + finc; //increment forcing
-
+	
 		for (int i = 0; i<nodes.N; i++)
 		{
 			avvolt.at(i) = 0;
 		}
 
-		nodes.reset();   //MAKE SURE I=0 IS NOT COMMENTED OUT
+		nodes.reset();   
 		nodes.newforcing2(); 
 		cout << k << endl;
 	}

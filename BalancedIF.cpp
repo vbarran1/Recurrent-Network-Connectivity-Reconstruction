@@ -18,7 +18,7 @@ using namespace std;
 
 
 //network recons of A with vectorized storage
-BalancedIF::BalancedIF(double t_0, double v_0 , int n1, int n2, short holder, double r) :Neuron(t_0, v_0)
+BalancedIF::BalancedIF(double t_0, double v_0 , int n1, int n2) :Neuron(t_0, v_0)
 {
 
 	V_R = 0;
